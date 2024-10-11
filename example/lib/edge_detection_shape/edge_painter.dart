@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class EdgePainter extends CustomPainter {
   EdgePainter({
-    @required this.points,
-    @required this.color
+    required this.points,
+    required this.color
   });
 
   final List<Offset> points;

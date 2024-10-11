@@ -9,8 +9,8 @@ import 'edge_detection_shape/edge_detection_shape.dart';
 
 class ImagePreview extends StatefulWidget {
   ImagePreview({
-    this.imagePath,
-    this.edgeDetectionResult
+    required this.imagePath,
+    required this.edgeDetectionResult
   });
 
   final String imagePath;
@@ -68,8 +68,8 @@ class _ImagePreviewState extends State<ImagePreview> {
 
     return EdgeDetectionShape(
       originalImageSize: Size(
-        imageSnapshot.data.width.toDouble(),
-        imageSnapshot.data.height.toDouble()
+        (imageSnapshot.data?.width??0).toDouble(),
+        (imageSnapshot.data?.height??0).toDouble()
       ),
       renderedImageSize: Size(box.size.width, box.size.height),
       edgeDetectionResult: widget.edgeDetectionResult,

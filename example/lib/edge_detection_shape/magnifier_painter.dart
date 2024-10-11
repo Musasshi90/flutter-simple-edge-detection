@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MagnifierPainter extends CustomPainter {
   const MagnifierPainter({
-    @required this.color,
+    required this.color,
     this.strokeWidth = 5
   });
 

@@ -5,8 +5,8 @@ import 'magnifier_painter.dart';
 
 class Magnifier extends StatefulWidget {
   const Magnifier({
-    @required this.child,
-    @required this.position,
+    required this.child,
+    required this.position,
     this.visible = true,
     this.scale = 1.5,
     this.size = const Size(160, 160)
@@ -23,15 +23,17 @@ class Magnifier extends StatefulWidget {
 }
 
 class _MagnifierState extends State<Magnifier> {
-  Size _magnifierSize;
-  double _scale;
-  Matrix4 _matrix;
+  late Size _magnifierSize;
+  late double _scale;
+  late Matrix4 _matrix;
 
   @override
   void initState() {
     _magnifierSize = widget.size;
     _scale = widget.scale;
-    _calculateMatrix();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _calculateMatrix();
+    });
 
     super.initState();
   }
@@ -84,7 +86,7 @@ class _MagnifierState extends State<Magnifier> {
           filter: ImageFilter.matrix(_matrix.storage),
           child: CustomPaint(
             painter: MagnifierPainter(
-              color: Theme.of(context).accentColor
+              color: Theme.of(context).colorScheme.secondary
             ),
             size: _magnifierSize,
           ),

@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:simple_edge_detection/edge_detection.dart';
+import 'package:simple_edge_detection_example/edge_detection_shape/magnifier.dart' as m;
 
 import 'edge_painter.dart';
 import 'magnifier.dart';
@@ -10,9 +11,9 @@ import 'touch_bubble.dart';
 
 class EdgeDetectionShape extends StatefulWidget {
   EdgeDetectionShape({
-    @required this.renderedImageSize,
-    @required this.originalImageSize,
-    @required this.edgeDetectionResult
+    required this.renderedImageSize,
+    required this.originalImageSize,
+    required this.edgeDetectionResult
   });
 
   final Size renderedImageSize;
@@ -24,17 +25,17 @@ class EdgeDetectionShape extends StatefulWidget {
 }
 
 class _EdgeDetectionShapeState extends State<EdgeDetectionShape> {
-  double edgeDraggerSize;
+  late double edgeDraggerSize;
 
-  EdgeDetectionResult edgeDetectionResult;
-  List<Offset> points;
+  late EdgeDetectionResult edgeDetectionResult;
+  late List<Offset> points;
 
-  double renderedImageWidth;
-  double renderedImageHeight;
-  double top;
-  double left;
+  late double renderedImageWidth;
+  late double renderedImageHeight;
+  late double top;
+  late double left;
 
-  Offset currentDragPosition;
+  Offset? currentDragPosition;
 
   @override
   void didChangeDependencies() {
@@ -53,16 +54,16 @@ class _EdgeDetectionShapeState extends State<EdgeDetectionShape> {
 
   @override
   Widget build(BuildContext context) {
-    return Magnifier(
+    return m.Magnifier(
       visible: currentDragPosition != null,
-      position: currentDragPosition,
+      position: currentDragPosition?? Offset(0, 0),
       child: Stack(
         children: [
           _getTouchBubbles(),
           CustomPaint(
             painter: EdgePainter(
               points: points,
-              color: Theme.of(context).accentColor.withOpacity(0.5)
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.5)
             )
           )
         ],

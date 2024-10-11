@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CameraView extends StatelessWidget {
   CameraView({
-    this.controller
+    required this.controller
   });
 
   final CameraController controller;
@@ -14,7 +14,7 @@ class CameraView extends StatelessWidget {
   }
   
   Widget _getCameraPreview() {
-    if (controller == null || !controller.value.isInitialized) {
+    if (!controller.value.isInitialized) {
       return Container();
     }
 
